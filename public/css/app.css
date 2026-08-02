@@ -1,0 +1,809 @@
+/* =========================================================================
+   Mini Booking Service — stylesheet
+   CSS biasa tanpa build step; cukup `php artisan serve`.
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   Palette
+   Deret 50–500 diambil dari palet biru earth tone yang diberikan. Deret
+   600–900 adalah perpanjangannya ke arah gelap pada hue yang sama, karena
+   palet aslinya tidak memuat warna yang cukup gelap untuk teks dan tombol.
+   `--clay` adalah satu-satunya aksen di luar keluarga biru, dipakai khusus
+   untuk menandai kursi yang dikunci orang lain agar benar-benar terbedakan.
+   ------------------------------------------------------------------------- */
+
+:root {
+    --c-50:  #f6f8fb;
+    --c-100: #ebf0f5;
+    --c-200: #dbe4ed;
+    --c-300: #c5d4e3;
+    --c-400: #a9c0d6;
+    --c-500: #8dacc8;
+    --c-600: #6e8faa;
+    --c-700: #52708b;
+    --c-800: #3a5468;
+    --c-900: #253746;
+
+    --clay-bg:     #f0e4d8;
+    --clay-border: #c8ac8d;
+    --clay-text:   #7d5c3d;
+
+    --sage-bg:     #e4ede5;
+    --sage-border: #a8c4ab;
+    --sage-text:   #3f6b4a;
+
+    --rust-bg:     #f3e3de;
+    --rust-border: #d7b0a3;
+    --rust-text:   #8c4a37;
+
+    --sand-bg:     #f5ecdd;
+    --sand-border: #d9c39b;
+    --sand-text:   #86663a;
+
+    --text:        var(--c-900);
+    --text-muted:  var(--c-700);
+    --surface:     #ffffff;
+    --border:      var(--c-200);
+
+    --radius:    14px;
+    --radius-sm: 9px;
+    --shadow:    0 1px 2px rgba(37, 55, 70, .04), 0 8px 24px rgba(37, 55, 70, .06);
+    --mono:      ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ---------- Dasar ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, var(--c-100) 0%, var(--c-50) 340px, var(--c-50) 100%);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, p, dl, dd, ul {
+    margin: 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ---------- Topbar ---------- */
+
+.topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.brand-mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--c-500), var(--c-800));
+    flex: none;
+}
+
+.brand-name {
+    font-size: 15px;
+    font-weight: 650;
+    letter-spacing: -.01em;
+}
+
+.topbar-session {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.topbar-user {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.topbar-user strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* ---------- Layout halaman ---------- */
+
+.page {
+    flex: 1;
+    width: 100%;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 34px 20px 56px;
+}
+
+.footer {
+    max-width: 780px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 12px;
+    color: var(--c-600);
+    text-align: center;
+}
+
+/* ---------- Kartu ---------- */
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+}
+
+.card-narrow {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.card-title {
+    font-size: 19px;
+    font-weight: 650;
+    letter-spacing: -.015em;
+}
+
+.card-hint {
+    margin-top: 4px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+}
+
+.card form {
+    margin-top: 22px;
+}
+
+/* ---------- Form ---------- */
+
+.field {
+    margin-bottom: 16px;
+}
+
+.field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--c-300);
+    border-radius: var(--radius-sm);
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+    transition: border-color .15s, box-shadow .15s;
+}
+
+.field input::placeholder {
+    color: var(--c-400);
+}
+
+.field input:focus,
+.field select:focus {
+    outline: none;
+    border-color: var(--c-600);
+    box-shadow: 0 0 0 3px rgba(110, 143, 170, .18);
+}
+
+.field-error {
+    display: block;
+    min-height: 16px;
+    margin-top: 5px;
+    font-size: 12px;
+    color: var(--rust-text);
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+/* ---------- Tombol ---------- */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    font: inherit;
+    font-weight: 600;
+    color: #fff;
+    background: var(--c-800);
+    cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s;
+}
+
+.btn:hover:not(:disabled) {
+    background: var(--c-900);
+}
+
+.btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-ghost {
+    background: var(--surface);
+    border-color: var(--c-300);
+    color: var(--c-800);
+}
+
+.btn-ghost:hover:not(:disabled) {
+    background: var(--c-50);
+    border-color: var(--c-500);
+}
+
+.btn-sm {
+    padding: 6px 13px;
+    font-size: 13px;
+}
+
+.btn-link {
+    margin-top: 12px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 13px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.btn-link:hover:not(:disabled) {
+    background: none;
+    color: var(--rust-text);
+}
+
+.btn-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ---------- Bar pesanan tertunda ---------- */
+
+.pending {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    padding: 13px 18px;
+    border: 1px solid var(--clay-border);
+    border-radius: var(--radius-sm);
+    background: var(--clay-bg);
+    color: var(--clay-text);
+}
+
+.pending-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.pending-label {
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    opacity: .8;
+}
+
+.pending-seats {
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.pending-side {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.pending-timer {
+    font-family: var(--mono);
+    font-size: 16px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.pending .btn {
+    background: var(--clay-text);
+    border-color: var(--clay-text);
+}
+
+.pending .btn:hover:not(:disabled) {
+    background: #63482f;
+}
+
+/* ---------- Alert ---------- */
+
+.alert {
+    margin-top: 18px;
+    padding: 11px 14px;
+    border: 1px solid;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+}
+
+.alert-success { background: var(--sage-bg); border-color: var(--sage-border); color: var(--sage-text); }
+.alert-error   { background: var(--rust-bg); border-color: var(--rust-border); color: var(--rust-text); }
+.alert-warning { background: var(--sand-bg); border-color: var(--sand-border); color: var(--sand-text); }
+
+/* ---------- Pilihan akun di halaman login ---------- */
+
+.accounts {
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 8px;
+}
+
+.accounts-label {
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--c-600);
+}
+
+.account {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    padding: 9px 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--c-50);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+}
+
+.account:hover {
+    background: var(--surface);
+    border-color: var(--c-500);
+}
+
+.account-name {
+    font-size: 13.5px;
+    font-weight: 600;
+}
+
+.account-email {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ---------- Hasil pencarian jadwal ---------- */
+
+.schedule-list {
+    margin-top: 24px;
+    display: grid;
+    gap: 10px;
+}
+
+.schedule {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--c-50);
+    transition: border-color .15s, background .15s;
+}
+
+.schedule:hover {
+    border-color: var(--c-400);
+    background: var(--surface);
+}
+
+.schedule.is-full {
+    opacity: .55;
+}
+
+.schedule-time {
+    font-size: 17px;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+}
+
+.schedule-route {
+    font-size: 13.5px;
+    margin-top: 1px;
+}
+
+.schedule-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+.schedule-side {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.schedule-price {
+    font-weight: 650;
+    font-size: 14.5px;
+    white-space: nowrap;
+}
+
+.empty-state {
+    margin-top: 24px;
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    background: var(--c-50);
+    border: 1px dashed var(--c-300);
+    border-radius: var(--radius-sm);
+}
+
+/* ---------- Legenda ---------- */
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 18px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.legend li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.swatch {
+    width: 13px;
+    height: 13px;
+    border-radius: 4px;
+    border: 1px solid;
+    flex: none;
+}
+
+.swatch.seat-available { background: var(--surface);      border-color: var(--c-300); }
+.swatch.seat-selected  { background: var(--c-800);        border-color: var(--c-800); }
+.swatch.seat-mine      { background: var(--c-300);        border-color: var(--c-600); }
+.swatch.seat-locked    { background: var(--clay-bg);      border-color: var(--clay-border); }
+.swatch.seat-booked    { background: var(--c-100);        border-color: var(--c-300); }
+
+/* ---------- Peta kursi ---------- */
+
+.deck {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--c-50);
+    padding: 16px;
+}
+
+.deck-front {
+    font-size: 11px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--c-600);
+    text-align: center;
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px dashed var(--c-300);
+}
+
+.seat-map {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(66px, 1fr));
+    gap: 8px;
+}
+
+.seat {
+    padding: 11px 4px 9px;
+    border: 1px solid var(--c-300);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 650;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.25;
+    cursor: pointer;
+    transition: border-color .12s, background .12s, transform .12s;
+}
+
+.seat small {
+    display: block;
+    margin-top: 1px;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.seat:hover:not(:disabled) {
+    border-color: var(--c-600);
+    transform: translateY(-1px);
+}
+
+.seat.is-selected {
+    background: var(--c-800);
+    border-color: var(--c-800);
+    color: #fff;
+}
+
+.seat.is-selected small { color: rgba(255, 255, 255, .72); }
+
+.seat.is-mine {
+    background: var(--c-300);
+    border-color: var(--c-600);
+    cursor: not-allowed;
+}
+
+.seat.is-mine small { color: var(--c-700); }
+
+.seat.is-locked {
+    background: var(--clay-bg);
+    border-color: var(--clay-border);
+    color: var(--clay-text);
+    cursor: not-allowed;
+}
+
+.seat.is-locked small { color: var(--clay-text); opacity: .75; }
+
+.seat.is-booked {
+    background: var(--c-100);
+    border-color: var(--c-200);
+    color: var(--c-500);
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.seat.is-booked small { color: var(--c-400); text-decoration: none; }
+
+.seat-actions {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.selection {
+    font-size: 13.5px;
+    color: var(--text-muted);
+}
+
+.selection strong {
+    color: var(--text);
+    font-weight: 650;
+}
+
+/* ---------- Hitung mundur ---------- */
+
+.countdown {
+    margin-top: 22px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    border: 1px solid var(--c-300);
+    border-radius: var(--radius-sm);
+    background: var(--c-50);
+}
+
+.countdown-label {
+    font-size: 12px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--c-600);
+}
+
+.countdown-value {
+    font-family: var(--mono);
+    font-size: 25px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+}
+
+.countdown.is-urgent {
+    background: var(--rust-bg);
+    border-color: var(--rust-border);
+}
+
+.countdown.is-urgent .countdown-label,
+.countdown.is-urgent .countdown-value {
+    color: var(--rust-text);
+}
+
+/* ---------- Daftar detail ---------- */
+
+.detail {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 0;
+    font-size: 13.5px;
+    border-top: 1px solid var(--border);
+}
+
+.detail dt {
+    padding: 9px 0;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+}
+
+.detail dd {
+    padding: 9px 0;
+    font-weight: 600;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail dd.is-total {
+    font-size: 16.5px;
+    font-weight: 700;
+}
+
+.detail dd.is-code {
+    font-family: var(--mono);
+    font-size: 14px;
+    letter-spacing: .02em;
+}
+
+.detail dd.is-plain {
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+/* ---------- Halaman hasil ---------- */
+
+.result-icon {
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.result-icon.is-success { background: var(--sage-bg); color: var(--sage-text); }
+.result-icon.is-error   { background: var(--rust-bg); color: var(--rust-text); }
+.result-icon.is-warning { background: var(--sand-bg); color: var(--sand-text); }
+
+.result-title,
+.result-message {
+    text-align: center;
+}
+
+#result-card .btn-block {
+    margin-top: 24px;
+}
+
+/* ---------- Responsif ---------- */
+
+@media (max-width: 560px) {
+    .card {
+        padding: 22px 18px;
+    }
+
+    .field-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .detail {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .schedule {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .schedule-side {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .seat-map {
+        grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+    }
+
+    .seat-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .seat-actions .btn-row .btn {
+        flex: 1;
+    }
+
+    .pending,
+    .pending-side {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .pending-side {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #summary-card .btn-row .btn {
+        flex: 1 1 140px;
+    }
+}
