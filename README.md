@@ -13,7 +13,7 @@ Aplikasi API sederhana untuk booking kursi dengan mekanisme concurrency handling
    ```
    
    ```bash
-   copy .env.example .env
+   php artisan key:generate
    ```
 3. Atur database MySQL di file `.env`.
 
