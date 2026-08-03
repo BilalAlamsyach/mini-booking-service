@@ -43,10 +43,10 @@ class DatabaseSeeder extends Seeder
                     'email_verified_at' => now(),
                 ]
             ),
-            'syifa' => User::updateOrCreate(
+            'firman' => User::updateOrCreate(
                 ['email' => 'user2@example.com'],
                 [
-                    'name' => 'Syifa Syahida',
+                    'name' => 'Firmansyach',
                     'password' => Hash::make('password'),
                     'email_verified_at' => now(),
                 ]
@@ -105,7 +105,6 @@ class DatabaseSeeder extends Seeder
         $seatNumbers = collect(range(1, 10))
             ->flatMap(fn (int $n) => ['A'.$n, 'B'.$n])
             ->all();
-
         $seatRows = [];
 
         foreach ($routes as $route) {

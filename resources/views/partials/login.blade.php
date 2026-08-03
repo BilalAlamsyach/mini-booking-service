@@ -27,7 +27,7 @@
             <span class="account-email">user@example.com</span>
         </button>
         <button type="button" class="account" data-fill-email="user2@example.com" data-fill-password="password">
-            <span class="account-name">Syifa Syahida</span>
+            <span class="account-name">Firmansyach</span>
             <span class="account-email">user2@example.com</span>
         </button>
     </div>

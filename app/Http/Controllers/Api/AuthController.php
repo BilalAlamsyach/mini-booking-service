@@ -13,11 +13,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthController extends Controller
 {
-    /**
-     * Login dengan user seed dan terbitkan token Bearer.
-     *
-     * Tidak ada alur registrasi — akun disediakan lewat DatabaseSeeder.
-     */
+
     public function login(LoginRequest $request): JsonResponse
     {
         $user = User::where('email', $request->string('email'))->first();

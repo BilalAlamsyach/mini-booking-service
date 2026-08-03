@@ -29,7 +29,7 @@ Dokumentasi endpoint tersedia di [API.md](API.md).
 Saat banyak request mencoba mengunci kursi yang sama secara bersamaan, sistem menggunakan transaksi database dan locking untuk memastikan hanya satu request yang berhasil. Hasilnya, kursi tidak bisa diduplikasi atau dibooking oleh dua user sekaligus.
 
 ## Pendekatan Autentikasi
-Sistem menggunakan token Bearer berbasis Sanctum. Setelah login, client menerima access token dan refresh token. Access token dipakai untuk request biasa, sedangkan refresh token dipakai untuk memperbarui token tanpa login ulang.
+Sistem menggunakan token Bearer berbasis Sanctum. Setelah login, client menerima access token . Access token dipakai untuk request biasa, sedangkan refresh token dipakai untuk memperbarui token tanpa login ulang.
 
 ## Testing
 Untuk load test concurrency:

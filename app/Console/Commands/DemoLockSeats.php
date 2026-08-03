@@ -145,10 +145,6 @@ class DemoLockSeats extends Command
         }
 
         $minutes = max(1, (int) $this->option('minutes'));
-
-        // TTL dan batas jumlah kursi di-override sementara untuk proses ini
-        // saja — supaya lock bisa dibuat bertahan lebih lama dari 5 menit dan
-        // mencakup lebih dari 6 kursi saat menyiapkan skenario uji.
         config([
             'booking.lock_ttl_seconds' => $minutes * 60,
             'booking.max_seats_per_booking' => max(count($seatIds), (int) config('booking.max_seats_per_booking')),
@@ -256,7 +252,6 @@ class DemoLockSeats extends Command
 
             return;
         }
-
         $this->table(['Kursi', 'Kelas', 'Status', 'Terkunci s/d'], $rows->all());
     }
 }

@@ -14,36 +14,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
-/**
- * Penguncian kursi sementara.
- *
- * Tiga lapis pertahanan terhadap race condition:
- *
- *  1. Pessimistic row lock — `lockForUpdate()` di dalam transaksi membuat dua
- *     request untuk kursi yang sama dijalankan berurutan, bukan bersamaan.
- *  2. Unique index `seat_holds.seat_id` — jaring pengaman tingkat database bila
- *     dua INSERT untuk kursi yang belum punya baris hold lolos bersamaan.
- *  3. Verifikasi kepemilikan + `lock_token` saat konfirmasi (lihat BookingService).
- *
- * Lock yang sudah lewat `expires_at` selalu dianggap bebas pada saat dibaca
- * (lazy expiry), sehingga kebenaran sistem tidak bergantung pada scheduler.
- */
+
 class SeatLockService
 {
-    /**
-     * Berapa kali transaksi diulang bila MySQL melaporkan deadlock atau lock
-     * wait timeout. Konflik semacam itu wajar terjadi pada seat map yang ramai.
-     */
+
     private const TRANSACTION_ATTEMPTS = 3;
 
     /**
-     * Kunci sejumlah kursi untuk pengguna selama TTL yang dikonfigurasi.
      *
      * @param  list<int>  $seatIds
      * @return array{lock_token: string, expires_at: Carbon, seats: Collection<int, Seat>}
      *
      * @throws SeatUnavailableException|ValidationException
      */
+    
     public function lock(User $user, int $scheduleId, array $seatIds): array
     {
         $seatIds = $this->normalizeSeatIds($seatIds);

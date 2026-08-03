@@ -13,10 +13,7 @@ class SeatLockController extends Controller
 {
     public function __construct(private readonly SeatLockService $seatLocks) {}
 
-    /**
-     * (c) Kunci kursi sementara selama TTL yang dikonfigurasi (default 5 menit).
-     * Terproteksi.
-     */
+
     public function store(LockSeatsRequest $request): JsonResponse
     {
         $result = $this->seatLocks->lock(
@@ -41,10 +38,6 @@ class SeatLockController extends Controller
         ], 201);
     }
 
-    /**
-     * Lepas lock lebih awal, mis. saat pengguna membatalkan pilihan kursi.
-     * Terproteksi.
-     */
     public function destroy(Request $request, string $lockToken): JsonResponse
     {
         $released = $this->seatLocks->release($request->user(), $lockToken);

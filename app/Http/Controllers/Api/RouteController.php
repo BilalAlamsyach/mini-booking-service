@@ -8,9 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 class RouteController extends Controller
 {
-    /**
-     * Daftar rute untuk mengisi dropdown pencarian. Publik.
-     */
+
     public function index(): JsonResponse
     {
         $routes = Route::query()

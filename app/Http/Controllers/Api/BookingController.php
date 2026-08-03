@@ -14,9 +14,7 @@ class BookingController extends Controller
 {
     public function __construct(private readonly BookingService $bookings) {}
 
-    /**
-     * Riwayat booking milik pengguna. Terproteksi.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $bookings = Booking::query()
@@ -30,9 +28,7 @@ class BookingController extends Controller
         ]);
     }
 
-    /**
-     * (d) Konfirmasi pemesanan sebelum lock kedaluwarsa. Terproteksi.
-     */
+
     public function store(ConfirmBookingRequest $request): JsonResponse
     {
         $booking = $this->bookings->confirm(
@@ -50,9 +46,6 @@ class BookingController extends Controller
         ], 201);
     }
 
-    /**
-     * Detail satu booking milik pengguna. Terproteksi.
-     */
     public function show(Request $request, Booking $booking): JsonResponse
     {
         abort_if($booking->user_id !== $request->user()->id, 404);
