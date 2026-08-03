@@ -7,17 +7,22 @@ Aplikasi API sederhana untuk booking kursi dengan mekanisme concurrency handling
    ```bash
    composer install
    ```
-2. Salin environment jika perlu:
+2. Setup Environment & Application Key:
+   ```bash
+   copy .env.example .env
+   ```
+   
    ```bash
    copy .env.example .env
    ```
 3. Atur database MySQL di file `.env`.
-4. Jalankan migrasi dan seeder:
+
+5. Jalankan migrasi dan seeder:
    ```bash
    php artisan migrate
    php artisan db:seed
    ```
-5. Jalankan aplikasi:
+6. Jalankan aplikasi:
    ```bash
    php artisan serve
    ```
