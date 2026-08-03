@@ -26,7 +26,11 @@ Aplikasi API sederhana untuk booking kursi dengan mekanisme concurrency handling
 Dokumentasi endpoint tersedia di [API.md](API.md).
 
 ## Pendekatan Concurrency
-Saat banyak request mencoba mengunci kursi yang sama secara bersamaan, sistem menggunakan transaksi database dan locking untuk memastikan hanya satu request yang berhasil. Hasilnya, kursi tidak bisa diduplikasi atau dibooking oleh dua user sekaligus.
+Saat banyak request mencoba mengunci kursi yang sama secara bersamaan, sistem menggunakan beberapa lapisan perlindungan: 
+- Row-level locking: saat kursi dan hold terkait dibuka, sistem memakai `lockForUpdate()` sehingga request lain menunggu sampai transaksi selesai.
+- Unique constraint di tabel `seat_holds`: setiap kursi hanya boleh punya satu hold aktif, sehingga race condition yang lolos dari pengecekan aplikasi tetap ditolak di level database.
+- Expiry time: lock sementara memiliki batas waktu tertentu, sehingga kursi bisa kembali tersedia jika user tidak menyelesaikan booking dalam waktu yang ditentukan.
+Dengan kombinasi ini, hanya satu request yang bisa menguasai kursi yang sama, dan booking ganda bisa dicegah meskipun banyak request datang bersamaan.
 
 ## Pendekatan Autentikasi
 Sistem menggunakan token Bearer berbasis Sanctum. Setelah login, client menerima access token . Access token dipakai untuk request biasa, client juga memiliki refresh token dipakai untuk memperbarui token tanpa login ulang.
